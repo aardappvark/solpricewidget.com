@@ -29,10 +29,10 @@
     <div class="container">
         <a class="back" href="/">&larr; Sol Price Widget</a>
         <h1>Privacy Policy</h1>
-        <span class="updated">Effective date: 1 February 2026 &middot; Last updated: 22 July 2026</span>
+        <span class="updated">Effective date: 1 February 2026 &middot; Last updated: 24 July 2026</span>
 
         <div class="highlight">
-            <p><strong>Summary:</strong> Sol Price Widget collects no personal data. We have no servers, no accounts, no analytics, and no tracking. All data stays on your device.</p>
+            <p><strong>Summary:</strong> Sol Price Widget collects <strong>no personal data</strong> — no accounts, no advertising, and no per-user tracking. The only thing that leaves your device for our own purposes is <strong>anonymous, aggregate usage counts</strong> (for example, that the app was opened), carrying <strong>no personal identifiers of any kind</strong>. Your ticker choices, cached prices, and everything else stay on your device.</p>
         </div>
 
         <h2>1. Introduction</h2>
@@ -56,14 +56,14 @@
         Jurisdiction: Commonwealth of Australia</p>
 
         <h2>3. Data We Collect</h2>
-        <p><strong>We collect no personal data whatsoever.</strong> The App does not collect, process, store, or transmit any personally identifiable information (PII) or personal data as defined under any applicable privacy law. This includes but is not limited to:</p>
+        <p><strong>We collect no personally identifiable information (PII)</strong> and no personal data as defined under applicable privacy law. The App does not collect, process, store, or transmit any of the following:</p>
         <ul>
             <li>Names, email addresses, postal addresses, or phone numbers</li>
             <li>Device identifiers, IMEI, serial numbers, or advertising IDs (GAID/IDFA)</li>
-            <li>Precise or approximate location data (GPS, Wi-Fi, cell tower)</li>
-            <li>IP addresses (we operate no servers that could receive them)</li>
-            <li>Usage analytics, session data, or crash reports</li>
-            <li>Browsing history, search history, or app usage patterns</li>
+            <li>Precise or approximate location data (GPS, Wi-Fi, cell tower) — sanctions screening is performed on-device and stores nothing (Section 9)</li>
+            <li>Your IP address — our anonymous analytics endpoint (Section 7) never logs or stores it</li>
+            <li>Session data, per-user usage profiles, or crash reports</li>
+            <li>Browsing history, search history, or which specific tickers you view</li>
             <li>Biometric data, health data, or genetic data</li>
             <li>Financial information, payment details, or wallet addresses</li>
             <li>Contacts, calendar data, or call logs</li>
@@ -71,6 +71,7 @@
             <li>Any data classified as "sensitive information" under the Australian Privacy Act</li>
             <li>Any "special category data" under Article 9 of the GDPR</li>
         </ul>
+        <p>The App does collect <strong>anonymous, aggregate usage statistics</strong> that contain no personal identifiers and cannot be linked to you or your device. These are described in full in Section 7 and are, by design, <strong>anonymous data rather than personal data</strong> under GDPR Recital 26.</p>
 
         <h2>4. Local Storage</h2>
         <p>The App stores the following data locally on your device using Android SharedPreferences:</p>
@@ -94,7 +95,8 @@
             <li><strong>Raydium API</strong> — api-v3.raydium.io (operated by Raydium Protocol)</li>
             <li><strong>CoinGecko API</strong> — api.coingecko.com (operated by Gecko Labs Pte. Ltd.)</li>
         </ul>
-        <p><strong>Important:</strong> We do not operate any intermediate servers, proxies, or backend infrastructure. All API requests are made directly from your device to the third-party providers listed above. We have no access to, and do not log, any aspect of these communications.</p>
+        <p><strong>Important:</strong> We operate no intermediate server for price data — all price API requests are made directly from your device to the third-party providers listed above, and we have no access to those communications.</p>
+        <p>The App additionally sends anonymous usage events to our own first-party analytics endpoint, <strong>sol-price-widget-analytics.aardappvark.workers.dev</strong> (a Cloudflare Worker). This message contains only an event name and no personal data; our endpoint derives an approximate country from the connection but never logs or stores your IP address. Section 7 describes exactly what is collected and why it is anonymous data, not personal data.</p>
         <p>As part of standard HTTPS/TLS communication, your device's IP address is necessarily transmitted to these third-party API providers. This is an inherent aspect of internet communication and is outside our control. We recommend you review the privacy practices of these providers:</p>
         <ul>
             <li><a href="https://www.coingecko.com/en/privacy">CoinGecko Privacy Policy</a></li>
@@ -105,16 +107,24 @@
         <h2>6. No Accounts, Registration, or Authentication</h2>
         <p>The App does not require or support any form of account creation, user registration, login, authentication, or identity verification. There is no user account system.</p>
 
-        <h2>7. No Analytics, Advertising, or Tracking</h2>
-        <p>The App contains:</p>
+        <h2>7. Anonymous Analytics (No Ads, No Personal Tracking)</h2>
+        <p>The App contains none of the following:</p>
         <ul>
-            <li><strong>No analytics SDKs</strong> (no Google Analytics, Firebase Analytics, Mixpanel, Amplitude, or similar)</li>
+            <li><strong>No third-party analytics SDKs</strong> (no Google Analytics, Firebase Analytics, Mixpanel, Amplitude, or similar)</li>
             <li><strong>No advertising frameworks</strong> (no AdMob, Facebook Ads, Unity Ads, or similar)</li>
             <li><strong>No tracking pixels, web beacons, or fingerprinting scripts</strong></li>
             <li><strong>No crash reporting SDKs</strong> (no Crashlytics, Sentry, Bugsnag, or similar)</li>
             <li><strong>No social media SDKs</strong> (no Facebook SDK, Twitter SDK, or similar)</li>
             <li><strong>No attribution or marketing SDKs</strong></li>
         </ul>
+        <p>The App does include one <strong>first-party, anonymous analytics ping</strong> so we can understand aggregate usage and improve the product. It is engineered to be non-identifying:</p>
+        <ul>
+            <li><strong>What is sent:</strong> when certain events occur (opening the app, completing the intro, requesting the widget, opening settings, changing a ticker selection, opening About or a legal page, adding or removing the widget, or being geo-blocked), the App sends a single small message containing <strong>only the event name</strong>, e.g. <code>{"event_type":"app_open"}</code>.</li>
+            <li><strong>What is NOT sent:</strong> no user ID, no device ID, no advertising ID, no wallet address, no fingerprint, and never which tokens you selected.</li>
+            <li><strong>How location is handled:</strong> our endpoint (a Cloudflare Worker) derives an approximate <strong>country</strong> from the network connection at the edge, solely to count events by country. <strong>Your IP address is never logged, stored, or processed by our code.</strong></li>
+            <li><strong>What is stored:</strong> only aggregate counts of the form (event name, country, day). Never individual events, sessions, timelines, or profiles.</li>
+        </ul>
+        <p>Because these statistics are aggregate and carry no identifiers, they constitute <strong>anonymous data, not personal data</strong>, under GDPR Recital 26 (and the equivalent standards under CCPA/CPRA, LGPD, APPI, PIPA, and PDPA), and do not require consent. For transparency, the aggregate figures are published at <a href="https://sol-price-widget-analytics.aardappvark.workers.dev/public-stats">sol-price-widget-analytics.aardappvark.workers.dev/public-stats</a>.</p>
 
         <h2>8. Permissions</h2>
         <p>The App requests only the following Android permissions:</p>
@@ -193,7 +203,7 @@
         <p>We retain no personal data. Locally cached price data and preferences are retained on your device until you clear the app data or uninstall the App. There is no server-side data retention.</p>
 
         <h2>15. Do Not Track</h2>
-        <p>The App respects Do Not Track (DNT) signals by default &mdash; we perform no tracking of any kind regardless of your DNT settings.</p>
+        <p>The App respects Do Not Track (DNT) by design: it performs no cross-context behavioural tracking, no profiling, and no tracking of individuals, regardless of your DNT settings. The anonymous aggregate analytics described in Section 7 identify no individual and set no cross-site or cross-app identifier.</p>
 
         <h2>16. Local Storage Disclosure (ePrivacy)</h2>
         <p>For the purposes of the EU ePrivacy Directive (2002/58/EC) and its national implementations: Sol Price Widget stores configuration data on your device using Android SharedPreferences. This storage is <strong>strictly necessary</strong> for the functioning of the application (exempted from consent requirements under Art. 5(3)) and does not involve any tracking, profiling, advertising, or cookie-equivalent functionality. The App does not use cookies, web storage, or any browser-based tracking mechanisms.</p>
