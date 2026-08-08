@@ -29,10 +29,10 @@
     <div class="container">
         <a class="back" href="/">&larr; Sol Price Widget</a>
         <h1>Privacy Policy</h1>
-        <span class="updated">Effective date: 1 February 2026 &middot; Last updated: 24 July 2026</span>
+        <span class="updated">Effective date: 1 February 2026 &middot; Last updated: 8 August 2026</span>
 
         <div class="highlight">
-            <p><strong>Summary:</strong> Sol Price Widget collects <strong>no personal data</strong> — no accounts, no advertising, and no per-user tracking. The only thing that leaves your device for our own purposes is <strong>anonymous, aggregate usage counts</strong> (for example, that the app was opened), carrying <strong>no personal identifiers of any kind</strong>. Your ticker choices, cached prices, and everything else stay on your device.</p>
+            <p><strong>Summary:</strong> Sol Price Widget collects <strong>no personal data</strong> — no accounts, no advertising, and no per-user tracking. The only thing that leaves your device for our own purposes is <strong>anonymous, aggregate usage counts</strong> (for example, that the app was opened), carrying <strong>no personal identifiers of any kind</strong>. Your ticker choices, cached prices, and everything else stay on your device &mdash; or, if you have Android Backup switched on, in your own encrypted Google backup (see Section 4).</p>
         </div>
 
         <h2>1. Introduction</h2>
@@ -82,16 +82,17 @@
         <p>This data:</p>
         <ul>
             <li>Is stored exclusively on your physical device in the app's private sandboxed storage</li>
-            <li>Is never transmitted to any server operated by us or any third party</li>
+            <li>Is not sent to any server operated by us</li>
             <li>Is not accessible to other applications on your device</li>
-            <li>Is automatically and permanently deleted when you uninstall the App</li>
+            <li>Is included in your device's encrypted Google backup if Android Backup is enabled &mdash; see the note below</li>
             <li>Can be manually cleared at any time via Android Settings &gt; Apps &gt; Sol Price Widget &gt; Clear Data</li>
         </ul>
+        <p><strong>Android Backup.</strong> If Android Backup is enabled on your device, the App's settings and cached price data are included in your device's encrypted Google backup, survive uninstalling the App, and may be restored when you reinstall. The App stores no wallet keys, credentials or personal data of any kind. You can exclude the App from backup in Android Settings, or delete the backup from your Google account.</p>
 
         <h2>5. Network Requests &amp; Third-Party API Providers</h2>
         <p>The App makes HTTPS requests <strong>directly from your device</strong> to the following third-party public APIs to retrieve cryptocurrency price data:</p>
         <ul>
-            <li><strong>Jupiter Aggregator API</strong> — jup.ag (operated by Jupiter Exchange)</li>
+            <li><strong>Jupiter Aggregator API</strong> — lite-api.jup.ag (operated by Jupiter Exchange)</li>
             <li><strong>Raydium API</strong> — api-v3.raydium.io (operated by Raydium Protocol)</li>
             <li><strong>CoinGecko API</strong> — api.coingecko.com (operated by Gecko Labs Pte. Ltd.)</li>
         </ul>
@@ -121,8 +122,8 @@
         <ul>
             <li><strong>What is sent:</strong> when certain events occur (opening the app, completing the intro, requesting the widget, opening settings, changing a ticker selection, opening About or a legal page, adding or removing the widget, or being geo-blocked), the App sends a single small message containing <strong>only the event name</strong>, e.g. <code>{"event_type":"app_open"}</code>.</li>
             <li><strong>What is NOT sent:</strong> no user ID, no device ID, no advertising ID, no wallet address, no fingerprint, and never which tokens you selected.</li>
-            <li><strong>How location is handled:</strong> our endpoint (a Cloudflare Worker) derives an approximate <strong>country</strong> from the network connection at the edge, solely to count events by country. <strong>Your IP address is never logged, stored, or processed by our code.</strong></li>
-            <li><strong>What is stored:</strong> only aggregate counts of the form (event name, country, day). Never individual events, sessions, timelines, or profiles.</li>
+            <li><strong>How location is handled:</strong> our endpoint (a Cloudflare Worker) derives an approximate <strong>country, city and region</strong> from the network connection at the edge, solely to count events by location. <strong>Your IP address is never logged, stored, or processed by our code.</strong></li>
+            <li><strong>What is stored:</strong> only aggregate counts of the form (event name, country, approximate city and region, day). Never individual events, sessions, timelines, or profiles. City is an edge estimate derived from the network connection, not from any location permission or GPS signal.</li>
         </ul>
         <p>Because these statistics are aggregate and carry no identifiers, they constitute <strong>anonymous data, not personal data</strong>, under GDPR Recital 26 (and the equivalent standards under CCPA/CPRA, LGPD, APPI, PIPA, and PDPA), and do not require consent. For transparency, the aggregate figures are published at <a href="https://sol-price-widget-analytics.aardappvark.workers.dev/public-stats">sol-price-widget-analytics.aardappvark.workers.dev/public-stats</a>.</p>
 
@@ -200,7 +201,7 @@
         </ul>
 
         <h2>14. Data Retention</h2>
-        <p>We retain no personal data. Locally cached price data and preferences are retained on your device until you clear the app data or uninstall the App. There is no server-side data retention.</p>
+        <p>We retain no personal data. Locally cached price data and preferences are retained on your device until you clear the app data or uninstall the App; if Android Backup is enabled they also persist in your own Google backup until you delete it (Section 4). There is no server-side data retention.</p>
 
         <h2>15. Do Not Track</h2>
         <p>The App respects Do Not Track (DNT) by design: it performs no cross-context behavioural tracking, no profiling, and no tracking of individuals, regardless of your DNT settings. The anonymous aggregate analytics described in Section 7 identify no individual and set no cross-site or cross-app identifier.</p>
